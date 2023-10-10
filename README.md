@@ -11,6 +11,18 @@ Modules actuellement installés (voir ) :
 
 ----
 
+## Usage
+
+* on lance l'application (.exe pour Windows)
+* après un court message d'explication l'application demande à l'utilisateur s'il souhaite continuer (répondre oui, non, yes, no, voire simplement o, y ou n)
+* l'application recherche les versions de QGIS installées sur l'ordinateur
+* s'il en trouve une seule il demande à l'utilisateur s'il souhaite installer les bibliothèques dedans
+* s'il en trouve plusieurs il demande à l'utilisateur de choisir dans quel QGIS les bibliothèques doivent être installées
+* l'application exécute alors le processus d'installation des bibliothèques (qui affichera un tas d'informations utiles en cas de problème)
+* à la fin elle demande à l'utilisateur de taper sur la touche entrée pour fermer l'application 
+
+----
+
 ## Licence
 
 [GPL v3](LICENSE)
