@@ -1,4 +1,4 @@
-# Gestionnaire FT - Extension pour QGIS
+# Installeur de modules Python tiers pour QGIS
 
 Utilitaire pour installer des modules tiers dans la distribution Python accompagnant QGIS.
 Ne fonctionne que sous Windows.
@@ -19,7 +19,7 @@ Modules actuellement installés (voir ) :
 * s'il en trouve une seule il demande à l'utilisateur s'il souhaite installer les bibliothèques dedans
 * s'il en trouve plusieurs il demande à l'utilisateur de choisir dans quel QGIS les bibliothèques doivent être installées
 * l'application exécute alors le processus d'installation des bibliothèques (qui affichera un tas d'informations utiles en cas de problème)
-* à la fin elle demande à l'utilisateur de taper sur la touche entrée pour fermer l'application 
+* à la fin elle demande à l'utilisateur de taper sur la touche entrée pour fermer l'application
 
 ----
 
