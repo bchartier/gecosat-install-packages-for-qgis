@@ -1,4 +1,5 @@
 import winreg
+import pathlib
 
 
 QGIS = "QGIS"
@@ -31,6 +32,33 @@ def get_qgis_apps() -> list[Software]:
     Returns:
         list[Software]: list of QGIS apps
     """
+
+    def _update_software_list_from_default_osgeo4w_dir() -> None:
+        """Add to the software list the QGIS apps found in the OSGeo4W and OSGeo4W64
+        directories.
+        """
+        qgis_default_dir_paths = [
+            r"C:\OSGeo4W64",
+            r"C:\OSGeo4W",
+        ]
+
+        for qgis_default_dir_path in qgis_default_dir_paths:
+            osgeo4w_bat_file = pathlib.Path(qgis_default_dir_path) / "OSGeo4W.bat"
+
+            if not osgeo4w_bat_file.exists():
+                continue
+
+            osgeo4w_bin_dir = pathlib.Path(qgis_default_dir_path) / "bin"
+            if not osgeo4w_bin_dir.exists():
+                continue
+
+            for qgis_exe_file in osgeo4w_bin_dir.glob("qgis*.exe"):
+                software: Software = Software("QGIS")
+                software.publisher = "OSGeo4W"
+                software.path = qgis_default_dir_path
+
+                software_list.append(software)
+                break
 
     def _create_software_from_info_key(sub_key) -> Software:
         """Create a Software object from one key found in the Widnows registry.
@@ -126,13 +154,17 @@ def get_qgis_apps() -> list[Software]:
                 value_name, _, _ = winreg.EnumValue(key, count)
                 if QGIS in value_name:
                     for software in software_list:
-                        if value_name.endswith(software.path_end_part):
+                        if software.path_end_part and value_name.endswith(
+                            software.path_end_part
+                        ):
                             software.path = value_name
                 count = count + 1
         except WindowsError:
             pass
 
     software_list = []
+
+    _update_software_list_from_default_osgeo4w_dir()
 
     _update_software_list_from_uninstall_info(
         winreg.HKEY_LOCAL_MACHINE, winreg.KEY_WOW64_32KEY
