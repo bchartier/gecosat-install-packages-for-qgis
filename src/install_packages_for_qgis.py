@@ -55,7 +55,7 @@ def _install_python_packages_for_qgis_app(qgis_app: Software):
         )
         install_bat_template = env.get_template("pip-install.bat")
         temp_install_bat_content = install_bat_template.render(
-            file_path=temp_requirements_file_path
+            file_path=temp_requirements_file_path,
         )
 
         with open(temp_install_bat_file_path, "w") as temp_install_bat_file:
